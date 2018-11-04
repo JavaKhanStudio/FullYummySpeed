@@ -1,0 +1,25 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.6
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets 
+{
+    main 
+    {
+        java 
+        {
+            srcDir 'src'
+            srcDir 'Game'
+            srcDir 'Interface'
+            srcDir 'Tools'
+            srcDir 'Index' 
+            srcDir 'Editeur'
+            srcDir 'Sounds'        
+        }
+    }
+}
+
+eclipse.project {
+    name = appName + "_core"
+}
