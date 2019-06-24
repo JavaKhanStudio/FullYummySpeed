@@ -40,7 +40,7 @@ public class Canvas extends Table
 	
 	public ShapeRenderer render_ShapeLine;
 	
-	public Canvas(String imagePath, final String saveName)
+	public Canvas(final String imagePath, final String saveName)
 	{
 		this.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * FVars_Game.drawingSize);
 		this.setLayoutEnabled(false);
@@ -64,6 +64,7 @@ public class Canvas extends Table
 					fout = new FileOutputStream("./" + saveName);
 					ObjectOutputStream oos = new ObjectOutputStream(fout);
 					oos.writeObject(drawModel.convertirEnPacket());
+					System.out.println("Item saved at " + imagePath);
 					System.exit(1);
 				} 
 				catch (FileNotFoundException e) 

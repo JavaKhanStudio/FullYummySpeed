@@ -1,15 +1,11 @@
 package com.mygdx.game.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import static com.mygdx.game.desktop.FVars_Desktop.* ;
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import org.lwjgl.opengl.Display;
-
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.Main_FYP_Game;
+import com.mygdx.mains.Main_FYP_Game;
 
 public class StartGame_Desktop 
 {

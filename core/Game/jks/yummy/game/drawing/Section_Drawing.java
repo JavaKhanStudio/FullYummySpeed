@@ -85,7 +85,7 @@ public class Section_Drawing extends Table
 		
 		
 		Controler_SoundEffect.setCurrentInstrument(Index_Sound.getPing()) ; 
-		Controler_Music.play("sound/music/tune1.wav");
+		Controler_Music.play("sound/music/tune1.mp3");
 	}
 	
 

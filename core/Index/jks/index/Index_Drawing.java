@@ -42,8 +42,12 @@ public class Index_Drawing
 		String startAt = "legume/" ;
 		ArrayList<DrawingModel> returningList = new ArrayList<DrawingModel>() ;
 		
+		
+		returningList.add(DrawingSection_Utils.getDrawing(startAt + "carrot")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "cornichon")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "oignion")) ;
+		returningList.add(DrawingSection_Utils.getDrawing(startAt + "poivron")) ;
+		returningList.add(DrawingSection_Utils.getDrawing(startAt + "radi")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "tomate")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "truc")) ;
 		

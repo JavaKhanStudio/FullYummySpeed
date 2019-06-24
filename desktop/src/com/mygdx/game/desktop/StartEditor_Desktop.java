@@ -1,11 +1,12 @@
 package com.mygdx.game.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import static com.mygdx.game.desktop.FVars_Desktop.* ;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.Main_FYP_Game;
+import static com.mygdx.game.desktop.FVars_Desktop.baseHeight;
+import static com.mygdx.game.desktop.FVars_Desktop.baseWidth;
+import static com.mygdx.game.desktop.FVars_Desktop.mulSize;
 
-import jks.yummy.editeur.Main_FYP_DrawEditor;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.mygdx.mains.Main_FYP_DrawEditor;
 
 public class StartEditor_Desktop 
 {

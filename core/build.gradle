@@ -9,13 +9,14 @@ sourceSets
     {
         java 
         {
-            srcDir 'src'
+            srcDir 'Mains'
             srcDir 'Game'
             srcDir 'Interface'
             srcDir 'Tools'
             srcDir 'Index' 
             srcDir 'Editeur'
-            srcDir 'Sounds'        
+            srcDir 'Sounds'
+            srcDir 'assets'             
         }
     }
 }
@@ -23,3 +24,6 @@ sourceSets
 eclipse.project {
     name = appName + "_core"
 }
+
+project.ext.mainClassName = "com.mygdx.mains.Main_FYP_Game"
+project.ext.assetsDir = new File("../core/assets");

@@ -14,6 +14,7 @@ public class Page_Accueil extends Table
 {
 
 	TextButton fruit ; 
+	TextButton legume ; 
 	TextButton mix ;
 	TextButton hard ;
 	
@@ -33,6 +34,15 @@ public class Page_Accueil extends Table
 		});
 		fruit.pad(buttonSize,buttonSize,buttonSize,buttonSize);
 		
+		legume  = new TextButton("Legume", GVars_Interface.baseSkin) ; 
+		legume.addListener(new InputListener() 
+		{
+			@Override
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+			{GVars_Game.initGame(Index_Drawing.getLegumeList()); return false ;}
+		});
+		legume.pad(buttonSize,buttonSize,buttonSize,buttonSize);
+		
 		mix = new TextButton("Mix-up!", GVars_Interface.baseSkin) ;
 		mix.addListener(new InputListener() 
 		{
@@ -45,6 +55,7 @@ public class Page_Accueil extends Table
 		
 		
 		this.add(fruit).row();
+		this.add(legume).row();
 		this.add(mix).row();
 	}
 	
