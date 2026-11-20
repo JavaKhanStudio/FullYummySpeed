@@ -48,7 +48,7 @@ public class Page_Accueil extends Table
 		{
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) 
-			{GVars_Game.initGame(Index_Drawing.getLegumeList()); return false ;}
+			{GVars_Game.initGame(Index_Drawing.getChallangeList()); return false ;}
 		});
 		mix.pad(buttonSize,buttonSize,buttonSize,buttonSize);
 		
