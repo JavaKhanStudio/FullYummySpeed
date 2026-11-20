@@ -90,7 +90,7 @@ Green.atlas by region name ("Clouds", "Mountains", "Trees", "Green_Road"...): re
 region in an atlas breaks it at load.
 Parallax classes come from core/jars/parallax-0.1.jar, a 2017 build with no source here
 (jks.tools2d.parallax; inferred: an early cut of Simon's parallax board's library).
-The dog: core/Tools/jks/animation2d/SpriteModelData.getDoggy, core/assets/perso/doggy.atlas.
+The dog: getDoggy in core/Tools/jks/animation2d/SpriteModelData.java, core/assets/perso/doggy.atlas.
 Controler_Obstacle and the obstacle_* fields are empty: there are no obstacles yet.
 """
 
@@ -143,8 +143,8 @@ Tag vocabulary and Doctrine (atelier r853).
 one that does not gets cut. `atelier --project fullyummyspeed doctor context_packs` lists paths that moved.
 Lexicon: `atelier --project fullyummyspeed term list`; a new word:
   atelier --project fullyummyspeed term add "<word>" --short "<one line>" --tags <tag>
-.atelier/doctrine.md holds Simon's lines once he approves them. A change to one is a doubt
-(`atelier ask`), never an edit.
+The doctrine (none yet: `atelier --project fullyummyspeed doctrine`) holds Simon's lines once
+he approves them. A change to one is a doubt (`atelier ask`), never an edit.
 The repo has no README.md and no CLAUDE.md yet. Identifiers mix French and English
 (Accueil, Retour, conteur, Legume, decal, sinergy): a lexicon term, not a rename.
 """
