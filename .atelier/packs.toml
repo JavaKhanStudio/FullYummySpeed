@@ -1,0 +1,150 @@
+# fullyummyspeed's TAGS AND THEIR CONTEXT PACKS — read by Atelier (projects/fullyummyspeed.toml
+# says packs = ".atelier/packs.toml"). A pack is what a session reads BEFORE the code it
+# describes, so when a change makes one wrong, fix it here IN THE SAME COMMIT. Only [tags.<slug>]
+# tables belong in this file: label, description, context, color, sort.
+#
+# FIRST DRAFT, 2026-11-20 (connect run p5338): written from reading every .java and build file,
+# never from working here. Lines marked (inferred) were not proven in the repo.
+#
+# The source is cut Eclipse-style: core/{Mains,Game,Interface,Tools,Index,Editeur,Sounds} are
+# each a source root (core/build.gradle sourceSets), so a package path starts BELOW them:
+# jks.yummy.game.* lives in core/Game/jks/yummy/game/.
+
+[tags.build]
+label = "Build & launch"
+description = "Gradle, the desktop launchers, the JDK, the offscreen wiring: anything about getting the game compiled and started"
+color = "#8d99ae"
+sort = 10
+context = """
+As checked in it does NOT build: no gradlew, `compile` (removed in Gradle 7), jcenter, a gwt
+buildscript plugin, sourceCompatibility 1.6. Only Gradle 9.x sits in ~/.gradle/wrapper/dists
+and the JDKs are 25 (/usr/lib/jvm) and 21 (~/.jdks/jdk-21.0.11+10).
+Probed at connect in a /tmp copy: compile->api/implementation, drop the buildscript block,
+Java 8 source -> `:desktop:classes` compiles on Gradle 9.8 + JDK 21.
+It still dies at start: libGDX's LWJGL2 natives need libjawt.so `SUNWprivate_1.1`, gone from
+every JDK >= 16 (same with gdxVersion 1.9.11). Running needs gdx-backend-lwjgl3 in
+desktop/src/com/mygdx/game/desktop/StartGame_Desktop.java and StartEditor_Desktop.java.
+Two entry points: StartGame_Desktop (900x500 window, the game) and StartEditor_Desktop (the
+drawing editor, 544x799 = FVars_Drawing.refSize* x refMulSize). desktop/build.gradle `run`
+starts the game with workingDir core/assets; every asset path is relative to it.
+core/jars/parallax-0.1.jar (2017, jks.tools2d.parallax) is a compile dependency via fileTree;
+core/old/ holds a byte-identical copy (cmp), not on the classpath.
+Offscreen: once revived, wire gradle/offscreen.gradle per the run-offscreen skill; every
+JavaExec (run, debug) calls rootProject.offscreen(it, 'unattended'). The sound of an agent's
+run then lands in desktop/build/audio/<task>.wav; ATELIER_NO_OFFSCREEN=1 puts it on screen.
+local.properties points at a Windows Android SDK; there is no android module.
+"""
+
+[tags.flow]
+label = "Menu & game flow"
+description = "The title menu, starting and resetting a game, the Retour button, the scene2d Stage and skin"
+color = "#ffb703"
+sort = 20
+context = """
+core/Mains/com/mygdx/mains/Main_FYP_Game.java: create() inits GVars_Interface, then shows
+core/Interface/jks/yummy/interfaces/accueil/Page_Accueil.java (Fruit / Legume / Mix-up!).
+render() order: section_action (the run) -> timer -> Stage -> section_drawing (lines on top).
+All state is static: core/Game/jks/yummy/game/GVars_Game.java initGame() builds the sections,
+resetGame() nulls them; a new static field must be reset there or it leaks into the next game.
+GVars_Interface.reset() makes a NEW Stage and re-sets the input processor; anything added to
+the old Stage is gone.
+Known: "Mix-up!" calls Index_Drawing.getLegumeList(), not getChallangeList(); the `hard`
+button is declared and never built.
+Skin: core/assets/skins/orange/skin/uiskin.json, font scaled x1.5 in GVars_Interface.loadSkin.
+GVars_Game.runningOnAndroid switches touch rules, but no android module exists.
+"""
+
+[tags.tracing]
+label = "Tracing the dots"
+description = "The play itself: joining a drawing's dots in order, the buttons, the guide line, the reveal of the picture, the hidden scoring"
+color = "#fb5607"
+sort = 30
+context = """
+core/Game/jks/yummy/game/drawing/Section_Drawing.java runs one drawing: read() builds one
+PassOverButton per DISTINCT point (a HashMap<Vector2,...>, so a point visited twice is one
+button), currentObjective walks drawingList in order, wonDrawing() reveals the picture.
+Hit rules are in DrawingSection_Utils.buildButton: touchDown on the current button starts a
+stroke, entering the next target scores. core/Game/.../desktopControl/Controler_Input.java:
+left-button release ends the stroke (plays miss unless the drawing is won), RIGHT click jumps.
+Point -> screen: PassOverButton scales BOTH x and y by GVars_Drawing.diffWidth (not
+diffHeight), from the editor's 544x799 space; GVars_Drawing.setDiff computes it.
+DrawingSection_Draw: lines, the guide (drawAssit) and the fade to the next image
+(FVars_Drawing.nextImageAtOpacity) that calls nextImage(); past the last drawing it
+reshuffles modelList and starts over (endDrawGestion), so a game never runs out of drawings.
+Scoring is dead code: Section_Scoring is never constructed, Utils_Scoring.connectionSucces
+does nothing with a null ref. The live reward is Controler_Score.wonDrawing(): +100 speed.
+"""
+
+[tags.runner]
+label = "The dog run"
+description = "The top of the screen: the parallax landscape, the dog's walk/run/jump, speed and distance to the win"
+color = "#2a9d8f"
+sort = 40
+context = """
+core/Game/jks/yummy/game/action/Section_Action.java: camera moves by GVars_Game.currentSpeed,
+the race is won at distanceAParcourir (500) x distanceMetric (100) units.
+Speed only rises in a game (Controler_Score.reset() zeroes it on Retour): +100 a drawing,
+asNewSpeed() picks IDLE / WALK / RUN against FVars_Scoring.runningCap.
+The landscape: Index_BuildBackGround.createLayers_Day reads core/assets/day/Day.atlas and
+Green.atlas by region name ("Clouds", "Mountains", "Trees", "Green_Road"...): renaming a
+region in an atlas breaks it at load.
+Parallax classes come from core/jars/parallax-0.1.jar, a 2017 build with no source here
+(jks.tools2d.parallax; inferred: an early cut of Simon's parallax board's library).
+The dog: core/Tools/jks/animation2d/SpriteModelData.getDoggy, core/assets/perso/doggy.atlas.
+Controler_Obstacle and the obstacle_* fields are empty: there are no obstacles yet.
+"""
+
+[tags.drawings]
+label = "Drawings & their data"
+description = "The fruit and vegetable drawings as DATA: the dot lists, their pictures, the editor that made them, and reading them out of the game"
+color = "#e63946"
+sort = 50
+context = """
+core/assets/DrawingData/{fruit,legume}/<name> (no extension) are Java-serialized, TWICE:
+the file is ObjectOutputStream.writeObject(byte[]), and that byte[] is SerializationUtils
+(commons-lang3) of a jks.yummy.game.model.DrawingModel. Read back by
+core/Game/.../drawing/DrawingSection_Utils.getDrawing. Reading one outside the game needs
+DrawingModel AND com.badlogic.gdx.math.Vector2 on the classpath, same serialVersionUIDs.
+DrawingModel = ArrayList<Vector2> drawingList (in order, a point may repeat) + imagePath
+("DrawingImage/fruit/banana.png"). Points are in the editor's window pixels (544x799, y up),
+and are already shifted by -buttonSize/2 (core/Editeur/jks/yummy/editeur/Inputs_Editor.java).
+Renaming or moving DrawingModel's package breaks every file (its class name is in the bytes).
+The editor: core/Mains/com/mygdx/mains/Main_FYP_DrawEditor.java, hard-coded `doing`/`subSector`;
+right click adds a point, "Convert" writes ./<name> in the WORKING DIR and System.exit(1).
+Lists: core/Index/jks/index/Index_Drawing.java. 11 fruit files, 7 legume; grape and peach
+have data and pictures but are in no list.
+"""
+
+[tags.audio]
+label = "Sound & music"
+description = "Music, the ping on each dot, the cheer and the miss"
+color = "#9b5de5"
+sort = 60
+context = """
+core/Sounds/jks/yummy/sounds/effect/Index_Sound.java and core/Game/jks/yummy/game/sounds/.
+Controler_Music.play("sound/music/tune1.mp3") starts when a Section_Drawing is built;
+tune1.wav (17 MB) beside it is unused (inferred from no reference in .java).
+Each dot plays Controler_SoundEffect.play(): it walks the instrument list up and down;
+getPing() loads ping3.wav TWICE, so ping1/ping2 are never heard.
+getPiano() reads sound/piano/piano_64..40.wav, a folder that does not exist; it is never called.
+Cheer and miss are lazy-loaded statics in Index_Sound and never disposed.
+An agent's run must not play in Simon's speakers: see the `build` pack (offscreen).
+"""
+
+[tags.docs]
+label = "Docs & board words"
+description = "README, agent docs; the packs, lexicon and doctrine. Docs only when the doc is the subject: a line wrong about one part goes to that part's tag"
+color = "#9fa8ff"
+sort = 110
+context = """
+The board's own upkeep lands here: the Maintenance tickets for Context packs, Lexicon,
+Tag vocabulary and Doctrine (atelier r853).
+.atelier/packs.toml holds one [tags.<slug>] per tag. A pack line names a file or a command;
+one that does not gets cut. `atelier --project fullyummyspeed doctor context_packs` lists paths that moved.
+Lexicon: `atelier --project fullyummyspeed term list`; a new word:
+  atelier --project fullyummyspeed term add "<word>" --short "<one line>" --tags <tag>
+.atelier/doctrine.md holds Simon's lines once he approves them. A change to one is a doubt
+(`atelier ask`), never an edit.
+The repo has no README.md and no CLAUDE.md yet. Identifiers mix French and English
+(Accueil, Retour, conteur, Legume, decal, sinergy): a lexicon term, not a rename.
+"""
