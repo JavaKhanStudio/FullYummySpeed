@@ -48,7 +48,7 @@ All state is static: core/Game/jks/yummy/game/GVars_Game.java initGame() builds 
 resetGame() nulls them; a new static field must be reset there or it leaks into the next game.
 GVars_Interface.reset() makes a NEW Stage and re-sets the input processor; anything added to
 the old Stage is gone.
-Known: "Mix-up!" calls Index_Drawing.getLegumeList(), not getChallangeList(); the `hard`
+"Mix-up!" plays Index_Drawing.getChallangeList() (fruit + legume, shuffled). Known: the `hard`
 button is declared and never built.
 Skin: core/assets/skins/orange/skin/uiskin.json, font scaled x1.5 in GVars_Interface.loadSkin.
 GVars_Game.runningOnAndroid switches touch rules, but no android module exists.
