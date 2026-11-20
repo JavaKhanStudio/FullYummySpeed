@@ -26,7 +26,9 @@ public class Index_Drawing
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "cerise")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "citrus")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "fraise")) ;
+		returningList.add(DrawingSection_Utils.getDrawing(startAt + "grape")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "melon")) ;
+		returningList.add(DrawingSection_Utils.getDrawing(startAt + "peach")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "pineapple")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "poire")) ;
 		returningList.add(DrawingSection_Utils.getDrawing(startAt + "pomme")) ;
