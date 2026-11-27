@@ -12,3 +12,8 @@ so the shuffles repeat.
   The old game's timer keeps ticking after Retour (filed as a task).
 
 The sheet is attached to r19 on the board (sheet-before.png).
+
+Correction (r27): cp.gradle depended on desktop:classes only, so core/build/libs/core-1.0.jar
+was not rebuilt and the first after-run above played the old jar. With cp.gradle fixed (it now
+depends on the runtime classpath), r19's commit gives the same seven shots again, and the timer
+reads null after Retour once r27 is in.

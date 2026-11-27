@@ -3,7 +3,7 @@ allprojects { p ->
     p.afterEvaluate {
         if (p.name == 'desktop') p.tasks.register('r19Classpath') {
             def cp = p.sourceSets.main.runtimeClasspath
-            dependsOn p.tasks.named('classes')
+            dependsOn cp  // builds core's jar too: 'classes' alone left a stale core-1.0.jar
             doLast { println 'R19CP=' + cp.asPath }
         }
     }

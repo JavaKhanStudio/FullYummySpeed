@@ -82,6 +82,7 @@ public class GVars_Game
 	{
 		section_drawing = null ; 
 		section_action = null ; 
+		timer = null ; 
 		gameIsWon = false ; 
 		Controler_Music.reset() ; 
 		Controler_SoundEffect.reset() ; 
