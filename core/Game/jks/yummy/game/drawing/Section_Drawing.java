@@ -26,7 +26,6 @@ import jks.yummy.game.drawing.Vars.GVars_Drawing;
 import jks.yummy.game.model.DrawingModel;
 import jks.yummy.game.model.PassOverButton;
 import jks.yummy.game.score.Controler_Score;
-import jks.yummy.game.score.Utils_Scoring;
 import jks.yummy.game.sounds.Controler_Music;
 import jks.yummy.game.sounds.Controler_SoundEffect;
 import jks.yummy.interfaces.GVars_Interface;
@@ -111,7 +110,6 @@ public class Section_Drawing extends Table
 		drawingAssit = true ;
 		
 		this.add(isDrawOn) ;
-//		GVars_Game.scoring.newDrawing() ;
 	}
 	
 	public void resetValues()
@@ -139,9 +137,6 @@ public class Section_Drawing extends Table
 	
 	public void valueSucces(PassOverButton returningButton)
 	{
-		Utils_Scoring.connectionSucces(GVars_Game.section_scoring);
-		
-	
 		if(currentlySelected != null)
 			connecting(returningButton) ;
 		

@@ -19,7 +19,6 @@ import jks.yummy.game.drawing.Section_Drawing;
 import jks.yummy.game.model.DrawingModel;
 import jks.yummy.game.score.Controler_Score;
 import jks.yummy.game.score.GameTimer;
-import jks.yummy.game.score.Section_Scoring;
 import jks.yummy.game.sounds.Controler_Music;
 import jks.yummy.game.sounds.Controler_SoundEffect;
 import jks.yummy.interfaces.GVars_Interface;
@@ -29,7 +28,6 @@ public class GVars_Game
 {
 	public static boolean runningOnAndroid = false ; 
 	public static Section_Action section_action;
-	public static Section_Scoring section_scoring;
 	public static Section_Drawing section_drawing;
 	
 	public static GameTimer timer ; 
@@ -58,9 +56,6 @@ public class GVars_Game
 		timer = new GameTimer() ;
 		timer.setSize(Gdx.graphics.getWidth()/2, 200);
 		timer.setPosition((Gdx.graphics.getWidth() - timer.getWidth())/2, Gdx.graphics.getHeight()/2 - timer.getHeight());
-//		scoring = new Section_Scoring() ;
-//		scoring.setPosition(0, drawing.getHeight() + (Gdx.graphics.getHeight() * FVars_Game.decal));
-//		GVars_Interface.mainInterface.addActor(scoring);
 		
 		startGame() ;
 	}
@@ -90,7 +85,6 @@ public class GVars_Game
 	public static void resetGame()
 	{
 		section_drawing = null ; 
-		section_scoring = null ; 
 		section_action = null ; 
 		gameIsWon = false ; 
 		Controler_Music.reset() ; 

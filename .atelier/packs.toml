@@ -56,7 +56,7 @@ GVars_Game.runningOnAndroid switches touch rules, but no android module exists.
 
 [tags.tracing]
 label = "Tracing the dots"
-description = "The play itself: joining a drawing's dots in order, the buttons, the guide line, the reveal of the picture, the hidden scoring"
+description = "The play itself: joining a drawing's dots in order, the buttons, the guide line, the reveal of the picture, the +100 speed on a won drawing"
 color = "#fb5607"
 sort = 30
 context = """
@@ -71,8 +71,10 @@ diffHeight), from the editor's 544x799 space; GVars_Drawing.setDiff computes it.
 DrawingSection_Draw: lines, the guide (drawAssit) and the fade to the next image
 (FVars_Drawing.nextImageAtOpacity) that calls nextImage(); past the last drawing it
 reshuffles modelList and starts over (endDrawGestion), so a game never runs out of drawings.
-Scoring is dead code: Section_Scoring is never constructed, Utils_Scoring.connectionSucces
-does nothing with a null ref. The live reward is Controler_Score.wonDrawing(): +100 speed.
+There is no score: Section_Scoring and Utils_Scoring were deleted (r17); showing one is a new
+feature. The only reward is Controler_Score.wonDrawing(): +100 speed.
+Before/after proof of a tracing change: tools/r17/run.sh <dir> completes grape through
+valueSucces and shoots the reveal and the dog's speed-up; compare with tools/r17/shots.sha256.
 """
 
 [tags.runner]

@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import jks.yummy.game.GVars_Game;
 import jks.yummy.game.model.DrawingModel;
 import jks.yummy.game.model.PassOverButton;
-import jks.yummy.game.score.Utils_Scoring;
 import jks.yummy.interfaces.GVars_Interface;
 
 
@@ -51,7 +50,6 @@ public class DrawingSection_Utils
 					if(!ref.checkIfStarting(pos) && !GVars_Game.runningOnAndroid)
 					{
 						ref.setComeFromClick(false);
-						Utils_Scoring.resetMult();
 						ref.shiftSize() ;
 					}
 				}		

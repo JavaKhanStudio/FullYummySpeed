@@ -38,7 +38,6 @@ public class Controler_Input
 					if(!GVars_Game.section_drawing.currentDrawIsWon)
 					{
 						Index_Sound.playMiss(); ; 
-//						Utils_Scoring.resetMult();
 					}		
 				}
 					

@@ -1,0 +1,10 @@
+// r17: prints the desktop runtime classpath (one line) for tools/r16/run.sh.
+allprojects { p ->
+    p.afterEvaluate {
+        if (p.name == 'desktop') p.tasks.register('r17Classpath') {
+            def cp = p.sourceSets.main.runtimeClasspath
+            dependsOn p.tasks.named('classes')
+            doLast { println 'R17CP=' + cp.asPath }
+        }
+    }
+}
