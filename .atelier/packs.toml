@@ -20,9 +20,7 @@ Builds with ./gradlew (Gradle 9.8 wrapper) on JDK 21 or 25: `./gradlew :desktop:
 `:desktop:runEditor` opens the drawing editor, `:desktop:dist` a fat jar. libGDX 1.14.2,
 desktop on gdx-backend-lwjgl3 (LWJGL2's natives need libjawt SUNWprivate_1.1, gone since JDK 16);
 LWJGL pinned to 3.3.6 in gradle.properties (3.3.3 rejects Java 24+'s JNI). Sources compile
-with --release 17. Core deps are only gdx, commons-collections4/-lang3 and
-core/jars/parallax-0.1.jar (fileTree); bullet/box2d/ai/ashley/spine/controllers were dropped
-(nothing imported them). gdx 1.14 changed InputProcessor: scrolled(float,float) and
+with --release 17. gdx 1.14 changed InputProcessor: scrolled(float,float) and
 touchCancelled; an InputProcessor must implement both.
 Launchers: desktop/src/com/mygdx/game/desktop/StartGame_Desktop.java (900x500, centred near the
 top) and StartEditor_Desktop.java (544x799 = FVars_Drawing.refSize* x refMulSize). Both call
@@ -34,10 +32,7 @@ Offscreen (wired, gradle/offscreen.gradle): every JavaExec (run, runEditor, debu
 rootProject.offscreen(it, 'unattended'); a new one that does not stops the build. An agent's
 run goes to a headless cage and its sound to desktop/build/audio/<task>.wav;
 ATELIER_NO_OFFSCREEN=1 puts it on screen. Cage stretches the window to 1280x720.
-Picture: tools/offscreen-shot.sh tests/renders/rN/x.png 10,25 ./gradlew :desktop:run
---console=plain (menu up by ~8 s once compiled). The "[LWJGL] GLFW_PLATFORM_ERROR ... EGL"
-line at start in cage is harmless. tools/offscreen-lint.sh fails a tools/*.sh that runs
-java outside cage: wrap it in tools/offscreen.sh (tools/r3/run.sh does).
+Core deps, taking a picture, the offscreen lint: docs/build.md.
 """
 
 [tags.flow]
