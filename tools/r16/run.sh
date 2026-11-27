@@ -11,5 +11,5 @@ rm -rf "$OUT"; mkdir -p "$OUT"
 cd core/assets
 ../../tools/offscreen.sh java --enable-native-access=ALL-UNNAMED -cp "$B:$CP" RunProbe "$OUT"
 ls "$OUT"
-# The shots of 9a1af42 + r16 (Section_Action before and after its cleanup), for a later check:
+# The shots at 1280x720 under cage (r26: the window is made at the output size), for a later check:
 #   (cd <outdir> && sha256sum -c ../../tools/r16/shots.sha256)   # from tests/renders/r16/<x>
