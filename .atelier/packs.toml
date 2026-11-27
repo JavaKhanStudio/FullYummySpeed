@@ -116,8 +116,8 @@ and are already shifted by -buttonSize/2 (core/Editeur/jks/yummy/editeur/Inputs_
 Renaming or moving DrawingModel's package breaks every file (its class name is in the bytes).
 The editor: core/Mains/com/mygdx/mains/Main_FYP_DrawEditor.java, hard-coded `doing`/`subSector`;
 right click adds a point, "Convert" writes ./<name> in the WORKING DIR and System.exit(1).
-Lists: core/Index/jks/index/Index_Drawing.java. 11 fruit files, 7 legume; grape and peach
-have data and pictures but are in no list.
+Lists: core/Index/jks/index/Index_Drawing.java. All 11 fruit files and all 7 legume files
+are listed.
 """
 
 [tags.audio]
