@@ -2,14 +2,8 @@ package jks.yummy.game.action;
 
 import static jks.yummy.game.GVars_Game.batch;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -19,9 +13,7 @@ import jks.animation2d.SpriteModel;
 import jks.animation2d.SpriteModelData;
 import jks.tools2d.parallax.ParallaxBackground;
 import jks.tools2d.parallax.Utils_Parralax;
-import jks.yummy.game.FVars_Game;
 import jks.yummy.game.GVars_Game;
-import jks.yummy.game.drawing.Vars.GVars_Drawing;
 import jks.yummy.game.score.FVars_Scoring;
 import jks.yummy.interfaces.GVars_Interface;
 
@@ -34,9 +26,6 @@ public class Section_Action extends Table
 	
 	SpriteModel character ; 
 	
-	ShapeRenderer shape ; 
-	float shapeSizeX ;
-	float shapeSizeY ;
 	float groundLvl ; 
 	float currentSpeed ; 
 	
@@ -47,17 +36,9 @@ public class Section_Action extends Table
 	public static float jumpForce = 350 ;
 	float deplacementY ; 
 	
-	ArrayList<Obstacle> listObstacle ; 
-	
-	
 	float distanceParcouru ;
 	public static final int distanceMetric = 100 ; 
 	public static final int distanceAParcourir = 500 ; 
-	
-	public static int obstacle_Probability = 100; 
-	public static int obstacle_MinDistance ; 
-	public static int obstacle_MinSpeed ; 
-	public static float currentDistanceObstacle ; 
 	
 	ProgressBar barDistance ; 
 	
@@ -97,12 +78,6 @@ public class Section_Action extends Table
     	Vector2 position = new Vector2(this.getWidth()/8.5f,groundLvl) ;
     	character.setPosition(position);
 
-    	
-    	shape = new ShapeRenderer() ;
-    	shape.setColor( 0.5f,  0.5f, 0.5f, 0.5f);
-    	
-    	shapeSizeX = (float) (character.currentState.getKeyFrame(1, true).getRegionX()/6);
-    	shapeSizeY = shapeSizeX/2 ; 
     	
     	barDistance = new ProgressBar(0, distanceAParcourir, 1, false, GVars_Interface.baseSkin) ;
     	barDistance.setSize(this.getWidth() - this.getWidth()/10, 100);
@@ -161,9 +136,6 @@ public class Section_Action extends Table
 		
 		character.draw(batch);
 		batch.end();
-//		shape.begin(ShapeType.Filled);
-//		shape.ellipse(sprite.getPosition().x + shapeSizeX/10, sprite.getPosition().y + GVars_Game.drawing.getHeight()/2 + shapeSizeY/1.5f, shapeSizeX, shapeSizeY);
-//		shape.end();	
 	}
 	
 	public void drawParallax(float delta)

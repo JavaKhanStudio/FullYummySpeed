@@ -96,7 +96,7 @@ region in an atlas breaks it at load.
 Parallax classes come from core/jars/parallax-0.1.jar, a 2017 build with no source here
 (jks.tools2d.parallax; inferred: an early cut of Simon's parallax board's library).
 The dog: getDoggy in core/Tools/jks/animation2d/SpriteModelData.java, core/assets/perso/doggy.atlas.
-Controler_Obstacle and the obstacle_* fields are empty: there are no obstacles yet.
+There are no obstacles yet: r16 removed the empty Obstacle, Controler_Obstacle and obstacle_* stubs.
 """
 
 [tags.drawings]
