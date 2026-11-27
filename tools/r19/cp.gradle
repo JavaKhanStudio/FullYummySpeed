@@ -1,0 +1,10 @@
+// r19: prints the desktop runtime classpath (one line) for tools/r19/run.sh.
+allprojects { p ->
+    p.afterEvaluate {
+        if (p.name == 'desktop') p.tasks.register('r19Classpath') {
+            def cp = p.sourceSets.main.runtimeClasspath
+            dependsOn p.tasks.named('classes')
+            doLast { println 'R19CP=' + cp.asPath }
+        }
+    }
+}

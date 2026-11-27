@@ -12,9 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import jks.index.Index_Drawing;
 import jks.yummy.game.action.Section_Action;
 import jks.yummy.game.desktopControl.Controler_Input;
-//import jks.tools2d.parallax.Utils_Parralax;
-//import jks.yummy.game.action.Section_Action;
-import jks.yummy.game.drawing.DrawingSection_Utils;
 import jks.yummy.game.drawing.Section_Drawing;
 import jks.yummy.game.model.DrawingModel;
 import jks.yummy.game.score.Controler_Score;
@@ -66,7 +63,6 @@ public class GVars_Game
 		float buttonSize = Gdx.graphics.getWidth()/6 ; 
 		retour.setSize(buttonSize, buttonSize/2);
 		retour.setPosition(retour.getWidth()/2 , Gdx.graphics.getHeight() - retour.getHeight() - 50);
-//		retour.setPosition(Gdx.graphics.getWidth() - retour.getWidth() - 10, Gdx.graphics.getHeight() - retour.getHeight() - 50);
 		retour.addListener(new InputListener() 
 		{
 			@Override
@@ -97,11 +93,6 @@ public class GVars_Game
 		section_drawing.nextImage();
 	}
 	
-	public static void startGame_Test()
-	{
-		section_drawing.read(DrawingSection_Utils.getDrawing("test"));
-	}
-
 	public static float getCurrentSpeed() 
 	{
 		return currentSpeed;

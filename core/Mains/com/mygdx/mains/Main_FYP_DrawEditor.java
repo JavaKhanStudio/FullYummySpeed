@@ -49,7 +49,6 @@ public class Main_FYP_DrawEditor extends ApplicationAdapter
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		float delta = Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f);
 		canvas.draw();
 		GVars_Interface.render();
 	}
