@@ -13,9 +13,6 @@ public abstract class AnimationModel
 	public void update(float delta) 
 	{stateTime += delta ;}
 	
-	public abstract void applyMovement() ;
-	public abstract Vector2 getVelocity() ;
-	
 	public void reverse(boolean reverse)
 	{this.reverse = reverse ;}
 	
