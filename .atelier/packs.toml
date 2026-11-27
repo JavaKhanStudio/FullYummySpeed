@@ -28,7 +28,8 @@ Launchers: desktop/src/com/mygdx/game/desktop/StartGame_Desktop.java (900x500, c
 top) and StartEditor_Desktop.java (544x799 = FVars_Drawing.refSize* x refMulSize). Both call
 Platform_Desktop.preferX11OnLinux() BEFORE anything touches GLFW (getDisplayMode does): on
 native Wayland tools/offscreen-shot.sh finds no X window. workingDir is core/assets; every
-asset path is relative to it. core/old/ holds a copy of the jar, not on the classpath.
+asset path is relative to it. bin/ (Eclipse output) and
+local.properties are gitignored; there is no android module.
 Offscreen (wired, gradle/offscreen.gradle): every JavaExec (run, runEditor, debug) calls
 rootProject.offscreen(it, 'unattended'); a new one that does not stops the build. An agent's
 run goes to a headless cage and its sound to desktop/build/audio/<task>.wav;
@@ -37,7 +38,6 @@ Picture: tools/offscreen-shot.sh tests/renders/rN/x.png 10,25 ./gradlew :desktop
 --console=plain (menu up by ~8 s once compiled). The "[LWJGL] GLFW_PLATFORM_ERROR ... EGL"
 line at start in cage is harmless. tools/offscreen-lint.sh fails a tools/*.sh that runs
 java outside cage: wrap it in tools/offscreen.sh (tools/r3/run.sh does).
-local.properties points at a Windows Android SDK; there is no android module.
 """
 
 [tags.flow]
