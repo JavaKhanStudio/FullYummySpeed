@@ -64,18 +64,7 @@ public class RunProbe extends ApplicationAdapter {
 
     public static void main(String[] a) {
         new File(a[0]).mkdirs();
-        Lwjgl3ApplicationConfiguration c = new Lwjgl3ApplicationConfiguration();
-        // Inside cage (tools/offscreen.sh) the window is forced to cage's output after it is
-        // made, and the GL surface keeps its first size: a 900x500 window drew the game laid out
-        // for 1280x696 clipped to its lower-left 900x500 (r26). Made at the output's size,
-        // undecorated, it is never resized and the shot is the whole game. Elsewhere: 900x500,
-        // the size StartGame_Desktop opens.
-        if ("1".equals(System.getenv("ATELIER_INSIDE_CAGE"))) {
-            com.badlogic.gdx.Graphics.DisplayMode dm = Lwjgl3ApplicationConfiguration.getDisplayMode();
-            c.setDecorated(false);
-            c.setWindowedMode(dm.width, dm.height);
-        } else c.setWindowedMode(900, 500);
-        c.setForegroundFPS(0);
+        Lwjgl3ApplicationConfiguration c = ProbeWindow.config();
         new Lwjgl3Application(new RunProbe(new File(a[0]).getAbsolutePath()), c);
     }
 }

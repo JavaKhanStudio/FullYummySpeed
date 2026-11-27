@@ -6,7 +6,7 @@ cd "$(dirname "$0")/../.."
 OUT=$(realpath -m "${1:?usage: run.sh <outdir>}")
 CP=$(./gradlew -q --no-configuration-cache -I tools/r16/cp.gradle :desktop:r16Classpath | sed -n 's/^R16CP=//p')
 B=$(mktemp -d)
-javac -nowarn -d "$B" -cp "$CP" tools/r16/RunProbe.java
+javac -nowarn -d "$B" -cp "$CP" tools/r16/RunProbe.java tools/ProbeWindow.java
 rm -rf "$OUT"; mkdir -p "$OUT"
 cd core/assets
 ../../tools/offscreen.sh java --enable-native-access=ALL-UNNAMED -cp "$B:$CP" RunProbe "$OUT"

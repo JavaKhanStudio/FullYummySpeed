@@ -83,9 +83,7 @@ public class DrawProbe extends ApplicationAdapter {
 
     public static void main(String[] a) {
         new File(a[0]).mkdirs();
-        Lwjgl3ApplicationConfiguration c = new Lwjgl3ApplicationConfiguration();
-        c.setWindowedMode(900, 500);
-        c.setForegroundFPS(0);
+        Lwjgl3ApplicationConfiguration c = ProbeWindow.config();
         new Lwjgl3Application(new DrawProbe(new File(a[0]).getAbsolutePath()), c);
     }
 }

@@ -17,3 +17,7 @@ Correction (r27): cp.gradle depended on desktop:classes only, so core/build/libs
 was not rebuilt and the first after-run above played the old jar. With cp.gradle fixed (it now
 depends on the runtime classpath), r19's commit gives the same seven shots again, and the timer
 reads null after Retour once r27 is in.
+
+r28: FlowProbe now opens its window through tools/ProbeWindow.java, so the shots are 1280x720
+and the whole game; tools/r19/shots.sha256 holds those NEW hashes. Two runs: identical.
+PROBE_WINDOW=launcher tools/r19/run.sh <dir> keeps the launcher's 900x500 inside cage.

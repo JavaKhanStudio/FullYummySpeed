@@ -10,3 +10,7 @@ Utils_Scoring) and writes six PNGs: start, tracing, won, reveal, walking, later.
 - ./gradlew :desktop:classes compiles.
 
 The shots are attached to r17 on the board (sheet-before.png, after-*.png).
+
+r28: DrawProbe now opens its window through tools/ProbeWindow.java (undecorated at cage's output
+size inside cage), so the shots are 1280x720 and the whole game; tools/r17/shots.sha256 holds
+those NEW hashes (the old ones were 1280x696 frames clipped to 900x500). Two runs: identical.
