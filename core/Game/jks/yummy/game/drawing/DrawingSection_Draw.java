@@ -53,20 +53,6 @@ public class DrawingSection_Draw
 		render_ShapeLine.end();
 	}
 	
-	public static void drawLines_Dream(ShapeRenderer render_ShapeLine, ArrayList<Actor> currentLines)
-	{
-		render_ShapeLine.begin(ShapeType.Line);
-		render_ShapeLine.setColor(lineColor);
-		Gdx.gl.glLineWidth(GVars_Drawing.glLineWidth_Player) ;
-		
-		for(int a = 1 ; a < currentLines.size() ; a ++)
-		{
-			DrawingSection_Draw.drawBetween(render_ShapeLine, currentLines.get(a - 1), currentLines.get(a));
-		}
-		
-		render_ShapeLine.end();
-	}
-	
 	private static void drawBetween(ShapeRenderer render_ShapeLine,Actor actor, Actor actor2)
 	{
 		Vector2 from = new Vector2(actor.getX() + actor.getWidth()/2    + decalX,
@@ -81,7 +67,6 @@ public class DrawingSection_Draw
 	{
 		Image resultImage = new Image(Utils_Interface.buildTextureRegion(imagePath)) ; 
 		resultImage.setSize(toBeAddOn.getWidth(), toBeAddOn.getWidth());
-//		resultImage.setPosition(decalX, decalY);
 		resultImage.setColor(1, 1, 1,startImageVisibility);
 		return resultImage ; 
 	}

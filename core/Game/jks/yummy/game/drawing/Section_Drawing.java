@@ -6,9 +6,7 @@ import static jks.yummy.game.drawing.Vars.FVars_Drawing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -132,7 +130,6 @@ public class Section_Drawing extends Table
 		currentVisibilityOnResult = FVars_Drawing.startImageVisibility; 
 		lineColor = new Color(1,1,1,1) ;
 		currentDrawIsWon = false ; 
-		new PassOverButton().setColor(Color.WHITE) ;
 	}
 	
 	public void valueSucces(PassOverButton returningButton)
@@ -177,11 +174,6 @@ public class Section_Drawing extends Table
 			currentlySelected.addAction(Index_ActorAction.action_GrowingByWidth(buttonSizeAtFull,GVars_Drawing.growingSpeed));
 		}
 		
-	}
-	
-	void playSound() 
-	{
-		Controler_SoundEffect.play() ; 
 	}
 	
 	private void wonDrawing() 
@@ -251,9 +243,6 @@ public class Section_Drawing extends Table
 		if(currentDrawIsWon)
 		{
 			DrawingSection_Draw.endDrawGestion(this, delta);
-		}
-		else
-		{
 		}
 	}
 	
