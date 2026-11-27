@@ -16,22 +16,27 @@ description = "Gradle, the desktop launchers, the JDK, the offscreen wiring: any
 color = "#8d99ae"
 sort = 10
 context = """
-As checked in it does NOT build: no gradlew, `compile` (removed in Gradle 7), jcenter, a gwt
-buildscript plugin, sourceCompatibility 1.6. Only Gradle 9.x sits in ~/.gradle/wrapper/dists
-and the JDKs are 25 (/usr/lib/jvm) and 21 (~/.jdks/jdk-21.0.11+10).
-Probed at connect in a /tmp copy: compile->api/implementation, drop the buildscript block,
-Java 8 source -> `:desktop:classes` compiles on Gradle 9.8 + JDK 21.
-It still dies at start: libGDX's LWJGL2 natives need libjawt.so `SUNWprivate_1.1`, gone from
-every JDK >= 16 (same with gdxVersion 1.9.11). Running needs gdx-backend-lwjgl3 in
-desktop/src/com/mygdx/game/desktop/StartGame_Desktop.java and StartEditor_Desktop.java.
-Two entry points: StartGame_Desktop (900x500 window, the game) and StartEditor_Desktop (the
-drawing editor, 544x799 = FVars_Drawing.refSize* x refMulSize). desktop/build.gradle `run`
-starts the game with workingDir core/assets; every asset path is relative to it.
-core/jars/parallax-0.1.jar (2017, jks.tools2d.parallax) is a compile dependency via fileTree;
-core/old/ holds a byte-identical copy (cmp), not on the classpath.
-Offscreen: once revived, wire gradle/offscreen.gradle per the run-offscreen skill; every
-JavaExec (run, debug) calls rootProject.offscreen(it, 'unattended'). The sound of an agent's
-run then lands in desktop/build/audio/<task>.wav; ATELIER_NO_OFFSCREEN=1 puts it on screen.
+Builds with ./gradlew (Gradle 9.8 wrapper) on JDK 21 or 25: `./gradlew :desktop:run` plays,
+`:desktop:runEditor` opens the drawing editor, `:desktop:dist` a fat jar. libGDX 1.14.2,
+desktop on gdx-backend-lwjgl3 (LWJGL2's natives need libjawt SUNWprivate_1.1, gone since JDK 16);
+LWJGL pinned to 3.3.6 in gradle.properties (3.3.3 rejects Java 24+'s JNI). Sources compile
+with --release 17. Core deps are only gdx, commons-collections4/-lang3 and
+core/jars/parallax-0.1.jar (fileTree); bullet/box2d/ai/ashley/spine/controllers were dropped
+(nothing imported them). gdx 1.14 changed InputProcessor: scrolled(float,float) and
+touchCancelled; an InputProcessor must implement both.
+Launchers: desktop/src/com/mygdx/game/desktop/StartGame_Desktop.java (900x500, centred near the
+top) and StartEditor_Desktop.java (544x799 = FVars_Drawing.refSize* x refMulSize). Both call
+Platform_Desktop.preferX11OnLinux() BEFORE anything touches GLFW (getDisplayMode does): on
+native Wayland tools/offscreen-shot.sh finds no X window. workingDir is core/assets; every
+asset path is relative to it. core/old/ holds a copy of the jar, not on the classpath.
+Offscreen (wired, gradle/offscreen.gradle): every JavaExec (run, runEditor, debug) calls
+rootProject.offscreen(it, 'unattended'); a new one that does not stops the build. An agent's
+run goes to a headless cage and its sound to desktop/build/audio/<task>.wav;
+ATELIER_NO_OFFSCREEN=1 puts it on screen. Cage stretches the window to 1280x720.
+Picture: tools/offscreen-shot.sh tests/renders/rN/x.png 10,25 ./gradlew :desktop:run
+--console=plain (menu up by ~8 s once compiled). The "[LWJGL] GLFW_PLATFORM_ERROR ... EGL"
+line at start in cage is harmless. tools/offscreen-lint.sh fails a tools/*.sh that runs
+java outside cage: wrap it in tools/offscreen.sh (tools/r3/run.sh does).
 local.properties points at a Windows Android SDK; there is no android module.
 """
 

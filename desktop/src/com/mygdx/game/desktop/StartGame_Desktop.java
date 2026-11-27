@@ -1,10 +1,8 @@
 package com.mygdx.game.desktop;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.Graphics.DisplayMode;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.mygdx.mains.Main_FYP_Game;
 
 public class StartGame_Desktop 
@@ -13,16 +11,17 @@ public class StartGame_Desktop
 	
 	public static void main (String[] arg) 
 	{
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); 
+		Platform_Desktop.preferX11OnLinux();
+		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		DisplayMode screen = Lwjgl3ApplicationConfiguration.getDisplayMode(); 
 		
-
-		config.width = 900; 
-		config.height = 500;
+		int width = 900; 
+		int height = 500;
+		config.setWindowedMode(width, height);
 		
-		config.x = (int) (screenSize.getWidth()/2 - config.width/2) ; 
-		config.y = decalY/3;
+		// Centred horizontally, near the top, as the LWJGL2 launcher placed it.
+		config.setWindowPosition(screen.width/2 - width/2, decalY/3);
 		
-		new LwjglApplication(new Main_FYP_Game(), config);
+		new Lwjgl3Application(new Main_FYP_Game(), config);
 	}
 }
